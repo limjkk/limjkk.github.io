@@ -214,14 +214,10 @@ font:
 
 # Social Links
 # Key is the link label showing to end users.
-# Value is the target link (E.g. GitHub: https://github.com/iissnan)
+# Value is the target link
 social:
   GitHub: https://github.com/limjkk
   Instgram: https://www.instagram.com/limjkk96/
-  #Naver: https://blog.naver.com/ybook2006
-  #Resume : https://unluckyjung.github.io/resume/
-  #Linkedin : https://www.linkedin.com/in/yoonsung-j-a950a6179/
-  #LinkLabel: Link
 
 
 # Social Links Icons
