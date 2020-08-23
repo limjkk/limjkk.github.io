@@ -51,3 +51,7 @@ tags:
 
 ![이미지](/images/softwareengineering/14.JPG)
 ---
+
+영상
+<iframe width="1280" height="720" src="https://www.youtube.com/embed/7t1SXWBIAgc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+---
