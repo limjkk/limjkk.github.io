@@ -9,7 +9,7 @@ tags:
 ---
 
 # 학술제 발표자료
-![이미지](/images/opencv/strabismus/1.png)
+![이미지](/images/opencv/strabismus/1.jpg)
 ---
 
 # 실행영상
