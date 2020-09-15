@@ -1,11 +1,12 @@
 ---
 title: Opencv를 사용한 사시측정진단 프로그램
-date: 2019-06-30-18:00
+date: 2019-09-30-18:00
 categories:
 - Opencv
 
 tags:
 - Opencv
+- strabismus
 ---
 
 # 학술제 발표자료

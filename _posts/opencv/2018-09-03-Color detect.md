@@ -1,6 +1,6 @@
 ---
 title : "카메라를 이용한 색 검출"
-date: 2020-04-07-18:00
+date: 2018-06-30-18:00
 categories:
 - Opencv
 

@@ -1,6 +1,6 @@
 ---
 title : "Canny Edge Detection"
-date: 2020-04-07-18:00
+date: 2018-06-30-18:00
 categories:
 - Opencv
 
