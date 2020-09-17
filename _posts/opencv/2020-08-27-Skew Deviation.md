@@ -6,6 +6,7 @@ categories:
 
 tags:
 - Opencv
+- Skew Deviation
 ---
 
 # [결과]비교 이미지
