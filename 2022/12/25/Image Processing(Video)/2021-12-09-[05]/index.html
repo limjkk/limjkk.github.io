@@ -25,11 +25,16 @@
 <meta property="og:url" content="https://limjkk.github.io/2022/12/25/Image%20Processing(Video)/2021-12-09-[05]/index.html">
 <meta property="og:site_name" content="임진규의 Devlog">
 <meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://limjkk.github.io/images/Image_Processing/05/1.png">
+<meta property="og:image" content="https://limjkk.github.io/images/Image_Processing/05/2.png">
+<meta property="og:image" content="https://limjkk.github.io/images/Image_Processing/05/3.png">
+<meta property="og:image" content="https://limjkk.github.io/images/Image_Processing/05/4.png">
 <meta property="article:published_time" content="2022-12-24T20:15:05.523Z">
-<meta property="article:modified_time" content="2022-12-25T04:50:27.502Z">
+<meta property="article:modified_time" content="2022-12-25T07:12:30.092Z">
 <meta property="article:author" content="Lim Jin Kyu">
 <meta property="article:tag" content="Image Processing(Video)">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://limjkk.github.io/images/Image_Processing/05/1.png">
 
 <link rel="canonical" href="https://limjkk.github.io/2022/12/25/Image%20Processing(Video)/2021-12-09-[05]/">
 
@@ -198,7 +203,7 @@
               <span class="post-meta-item-text">작성일</span>
               
 
-              <time title="Post created: 2022-12-25 05:15:05 / Updated at: 13:50:27" itemprop="dateCreated datePublished" datetime="2022-12-25T05:15:05+09:00">2022-12-25</time>
+              <time title="Post created: 2022-12-25 05:15:05 / Updated at: 16:12:30" itemprop="dateCreated datePublished" datetime="2022-12-25T05:15:05+09:00">2022-12-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -264,14 +269,14 @@
 <h1 id="LSIS-System"><a href="#LSIS-System" class="headerlink" title="LSIS System"></a>LSIS System</h1><p>LSIS 시스템이란 Linear Shift Invariant System 의 약자로써,<br>이개념을 사용하여 1차원에서 여러 차원으로 적용 할 수 있다.</p>
 <p>LSIS시스템은 많은 다양한 이미지를 처리하는 알고리즘으로 이어지기 때문에 중요하다.<br>LSIS 시스템은 신호처리 및 오디오 처리에도 사용 될 수 있다.</p>
 <p>LSIS은 다음과 같은 속성들을 가지고 있다.</p>
-<h1 id="1-Linearity-선형성"><a href="#1-Linearity-선형성" class="headerlink" title="1. Linearity (선형성)"></a>1. Linearity (선형성)</h1><p>![이미지](&#x2F;images&#x2F;Image Processing&#x2F;05&#x2F;1.png)<br>LSIS 시스템에 입력 f1을 넣었을때 g1이 출력이 되고, f2를 넣었을때 g2가 나와야 한다.<br>입력을 넣었을때, 이미지와 같이 동일한 출력이 나와야 한다. 이러한 조건을 만족 했을 때,<br>시스템은 선형이라고 말할 수 있다.</p>
-<h1 id="2-Shift-Invariance"><a href="#2-Shift-Invariance" class="headerlink" title="2. Shift Invariance"></a>2. Shift Invariance</h1><p>![이미지](&#x2F;images&#x2F;Image Processing&#x2F;05&#x2F;2.png)</p>
+<h1 id="1-Linearity-선형성"><a href="#1-Linearity-선형성" class="headerlink" title="1. Linearity (선형성)"></a>1. Linearity (선형성)</h1><p><img src="/images/Image_Processing/05/1.png" alt="이미지"><br>LSIS 시스템에 입력 f1을 넣었을때 g1이 출력이 되고, f2를 넣었을때 g2가 나와야 한다.<br>입력을 넣었을때, 이미지와 같이 동일한 출력이 나와야 한다. 이러한 조건을 만족 했을 때,<br>시스템은 선형이라고 말할 수 있다.</p>
+<h1 id="2-Shift-Invariance"><a href="#2-Shift-Invariance" class="headerlink" title="2. Shift Invariance"></a>2. Shift Invariance</h1><p><img src="/images/Image_Processing/05/2.png" alt="이미지"></p>
 <p>Shift Invariance는 동잃하게 입력(f(x))를 했을 때 출력(g(x))가 나오고<br>아래와 같이 x에 a만큼 Shift를 하였을때, 동일하게 출력도 a만큼 이동을 해야 한다.</p>
 <p>따라서 이러한 조건들이 충족되면 Linear Shift Invariant System 이라고 한다.</p>
 <p>이제 LSIS이 Computer Vision과 관련된 이유를 알아본다.</p>
-<h1 id="Correlation-of-Image-and-Linear-Shift-Invariant-System"><a href="#Correlation-of-Image-and-Linear-Shift-Invariant-System" class="headerlink" title="Correlation of Image and Linear Shift Invariant System"></a>Correlation of Image and Linear Shift Invariant System</h1><p>![이미지](&#x2F;images&#x2F;Image Processing&#x2F;05&#x2F;3.png)</p>
+<h1 id="Correlation-of-Image-and-Linear-Shift-Invariant-System"><a href="#Correlation-of-Image-and-Linear-Shift-Invariant-System" class="headerlink" title="Correlation of Image and Linear Shift Invariant System"></a>Correlation of Image and Linear Shift Invariant System</h1><p><img src="/images/Image_Processing/05/3.png" alt="이미지"></p>
 <p>3번째 이미지에서 초점이 맞는 선상 f와 Focus가 맞지않는 선상 g가 있을 때<br>f와 g의 관계를 Linear Shift Invariant System으로 설명 될 수 있다.<br>예를 들어 이미지의 밝기의 경우 Working Distance가 변화 할 때 마다 초점과 밝기가 선형적으로 증가하거나 감소한다.<br>이는 선형성과도 관계가 있다. 또한 이미지에 존재하는 오브젝트가 이동하면, 초점이 맞춰진 이미지에서 이미지가 이동하게 되고, 초점이 맞지 않는 이미지도<br>같은 양만큼 이동한다. 이는 이동 불변성과 관계가 있다.</p>
-<h1 id="Convolution"><a href="#Convolution" class="headerlink" title="Convolution"></a>Convolution</h1><p>![이미지](&#x2F;images&#x2F;Image Processing&#x2F;05&#x2F;4.png)</p>
+<h1 id="Convolution"><a href="#Convolution" class="headerlink" title="Convolution"></a>Convolution</h1><p><img src="/images/Image_Processing/05/4.png" alt="이미지"></p>
 <h1 id="참고-영상"><a href="#참고-영상" class="headerlink" title="참고 영상"></a>참고 영상</h1><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=0OHRJMNKhX0" title="유튜브 주소">LSIS and Convolution | Image Processing I</a></p>
 <hr>
 

@@ -25,11 +25,14 @@
 <meta property="og:url" content="https://limjkk.github.io/2022/12/25/Image%20Processing(Video)/2021-11-21-Binary[01]/index.html">
 <meta property="og:site_name" content="임진규의 Devlog">
 <meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://limjkk.github.io/images/Image_Processing/blind_01/1.png">
+<meta property="og:image" content="https://limjkk.github.io/images/Image_Processing/blind_01/2.png">
 <meta property="article:published_time" content="2022-12-24T20:15:05.488Z">
-<meta property="article:modified_time" content="2022-12-25T04:50:17.374Z">
+<meta property="article:modified_time" content="2022-12-25T07:11:52.526Z">
 <meta property="article:author" content="Lim Jin Kyu">
 <meta property="article:tag" content="Image Processing(Video)">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://limjkk.github.io/images/Image_Processing/blind_01/1.png">
 
 <link rel="canonical" href="https://limjkk.github.io/2022/12/25/Image%20Processing(Video)/2021-11-21-Binary[01]/">
 
@@ -198,7 +201,7 @@
               <span class="post-meta-item-text">작성일</span>
               
 
-              <time title="Post created: 2022-12-25 05:15:05 / Updated at: 13:50:17" itemprop="dateCreated datePublished" datetime="2022-12-25T05:15:05+09:00">2022-12-25</time>
+              <time title="Post created: 2022-12-25 05:15:05 / Updated at: 16:11:52" itemprop="dateCreated datePublished" datetime="2022-12-25T05:15:05+09:00">2022-12-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -262,11 +265,11 @@
 
 
 <p>본 게시글은<br>First Principles of Computer Vision의 강의를 참고하여 작성하였습니다.<br><a target="_blank" rel="noopener" href="https://www.youtube.com/channel/UCf0WB91t8Ky6AuYcQV0CcLw/videos" title="유튜브 주소">유튜브 주소</a></p>
-<h1 id="Binary-Image"><a href="#Binary-Image" class="headerlink" title="Binary Image"></a>Binary Image</h1><p>Binary image란 이진값(0 또는 255)만 가지는 이미지로써<br>이미지 처리나 분석에 용이하게 해준다.<br>![이미지](&#x2F;images&#x2F;Image Processing&#x2F;blind_01&#x2F;1.png)</p>
+<h1 id="Binary-Image"><a href="#Binary-Image" class="headerlink" title="Binary Image"></a>Binary Image</h1><p>Binary image란 이진값(0 또는 255)만 가지는 이미지로써<br>이미지 처리나 분석에 용이하게 해준다.<br><img src="/images/Image_Processing/blind_01/1.png" alt="이미지"></p>
 <p>Binary Image는 Gray-Level Image를 사용하여 진행한다.<br>기본적인 이미지에는 Red, Green, Blue 3개의 색을 사용하여 구성 되며,<br>이에따라 3개의 채널로 구성이 되어있다.<br>해당 이미지를 Gray Scale을 진행해주면 1개의 채널만 구성되며,<br>각 픽셀은 0부터 255까지의 밝기값을 가지게 된다.</p>
 <p>여기서 각 픽셀의 Gray Value를 임계값(Threshold)와 비교하여 이진화를 진행한다.</p>
 <h1 id="소스코드"><a href="#소스코드" class="headerlink" title="소스코드"></a>소스코드</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">import cv2</span><br><span class="line">import numpy as np</span><br><span class="line">from copy import copy</span><br><span class="line"></span><br><span class="line">def GrayScale(IMG):</span><br><span class="line">    height, width, c = IMG.shape</span><br><span class="line">    image_data = np.asarray(IMG)</span><br><span class="line">    print(height,width,c)</span><br><span class="line">    for i in range(height):</span><br><span class="line">        for j in range(width):</span><br><span class="line">            image_data[i][j] = image_data[i][j][1]</span><br><span class="line">    Gray_Image = image_data[0:height,0:width,0:1] # 채널을 1개로 바꿔줌</span><br><span class="line">    return Gray_Image # 반환</span><br><span class="line"></span><br><span class="line">def Threshold(IMG,threshold,value): # GV(Gray Value,밝기값)이 임계값(Threshold)보다 큰 경우, Value 값으로 할당</span><br><span class="line">    height,width,c = IMG.shape</span><br><span class="line">    print(c)</span><br><span class="line">    for i in range(height):</span><br><span class="line">        for j in range (width):</span><br><span class="line">            if(IMG[i][j] &gt; threshold):</span><br><span class="line">                IMG[i][j] = value</span><br><span class="line">            else:</span><br><span class="line">                IMG[i][j] = 0</span><br><span class="line">    return IMG</span><br><span class="line"></span><br><span class="line">img = cv2.imread(&quot;/Users/lim/download.jpeg&quot;,1)</span><br><span class="line">cv2.imshow(&#x27;Original&#x27;,img)</span><br><span class="line">Grayimg = GrayScale(copy(img))</span><br><span class="line">cv2.imshow(&#x27;Gray&#x27;,Grayimg)</span><br><span class="line">Thresimg = Threshold(Grayimg,127,255)</span><br><span class="line">cv2.imshow(&#x27;threshold&#x27;,Thresimg)</span><br><span class="line">cv2.waitKey(0)</span><br><span class="line">cv2.destroyAllWindows()</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>실제 Opencv에서 제공하는 함수와 비교했을때, 약간의 차이가 있지만, 정상적으로 동작하는 것을 알 수 있다.<br>![이미지](&#x2F;images&#x2F;Image Processing&#x2F;blind_01&#x2F;2.png)</p>
+<p>실제 Opencv에서 제공하는 함수와 비교했을때, 약간의 차이가 있지만, 정상적으로 동작하는 것을 알 수 있다.<br><img src="/images/Image_Processing/blind_01/2.png" alt="이미지"></p>
 <h1 id="Topics"><a href="#Topics" class="headerlink" title="Topics"></a>Topics</h1><p><strong>(1) Geometric Properties</strong><br><strong>(2) Segmenting Binary Images</strong><br><strong>(3) Iterative Modification</strong></p>
 <h1 id="참고-영상"><a href="#참고-영상" class="headerlink" title="참고 영상"></a>참고 영상</h1><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=COxRYLrsscc" title="유튜브 주소">Overview | Binary Images</a></p>
 <hr>

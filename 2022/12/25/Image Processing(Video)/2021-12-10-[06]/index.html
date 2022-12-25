@@ -25,11 +25,16 @@
 <meta property="og:url" content="https://limjkk.github.io/2022/12/25/Image%20Processing(Video)/2021-12-10-[06]/index.html">
 <meta property="og:site_name" content="임진규의 Devlog">
 <meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="https://limjkk.github.io/images/Image_Processing/06/1.png">
+<meta property="og:image" content="https://limjkk.github.io/images/Image_Processing/06/2.png">
+<meta property="og:image" content="https://limjkk.github.io/images/Image_Processing/06/3.png">
+<meta property="og:image" content="https://limjkk.github.io/images/Image_Processing/06/4.png">
 <meta property="article:published_time" content="2022-12-24T20:15:05.529Z">
-<meta property="article:modified_time" content="2022-12-25T04:50:29.376Z">
+<meta property="article:modified_time" content="2022-12-25T07:12:35.340Z">
 <meta property="article:author" content="Lim Jin Kyu">
 <meta property="article:tag" content="Image Processing(Video)">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://limjkk.github.io/images/Image_Processing/06/1.png">
 
 <link rel="canonical" href="https://limjkk.github.io/2022/12/25/Image%20Processing(Video)/2021-12-10-[06]/">
 
@@ -198,7 +203,7 @@
               <span class="post-meta-item-text">작성일</span>
               
 
-              <time title="Post created: 2022-12-25 05:15:05 / Updated at: 13:50:29" itemprop="dateCreated datePublished" datetime="2022-12-25T05:15:05+09:00">2022-12-25</time>
+              <time title="Post created: 2022-12-25 05:15:05 / Updated at: 16:12:35" itemprop="dateCreated datePublished" datetime="2022-12-25T05:15:05+09:00">2022-12-25</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -262,15 +267,15 @@
 
 
 <p>본 게시글은<br>First Principles of Computer Vision의 강의를 참고하여 작성하였습니다.<br><a target="_blank" rel="noopener" href="https://www.youtube.com/channel/UCf0WB91t8Ky6AuYcQV0CcLw/videos" title="유튜브 주소">유튜브 주소</a></p>
-<p>![이미지](&#x2F;images&#x2F;Image Processing&#x2F;06&#x2F;1.png)<br>같이 오브젝트를 검출하기에 앞서, 다음 이미지와 같이 Salt and Pepper 노이즈는 이미지 위에 흩어져 있으며,<br>매우 두드러지게 나타나기 때문에 오브젝트만 검출해내기 쉽지 않다. 해당 이미지에서 동전만을 잡기 위해서 퍼지 필터나 가우시안 필터를<br>적용하면 노이즈가 약간 감소하는 것을 확인 할 수 있다. 노이즈가 감소하는 대신에 동전에 대한 디테일면에서는 화질이 감소하게 된다.<br>이는 블러링을 통해 이미지를 흐리게 처리하는 것으로써 실제로 노이즈를 제거하는 것이 아니기 때문에 Median Filter를 사용한다.  </p>
+<p><img src="/images/Image_Processing/06/1.png" alt="이미지"><br>같이 오브젝트를 검출하기에 앞서, 다음 이미지와 같이 Salt and Pepper 노이즈는 이미지 위에 흩어져 있으며,<br>매우 두드러지게 나타나기 때문에 오브젝트만 검출해내기 쉽지 않다. 해당 이미지에서 동전만을 잡기 위해서 퍼지 필터나 가우시안 필터를<br>적용하면 노이즈가 약간 감소하는 것을 확인 할 수 있다. 노이즈가 감소하는 대신에 동전에 대한 디테일면에서는 화질이 감소하게 된다.<br>이는 블러링을 통해 이미지를 흐리게 처리하는 것으로써 실제로 노이즈를 제거하는 것이 아니기 때문에 Median Filter를 사용한다.  </p>
 <h1 id="Median-Filtering"><a href="#Median-Filtering" class="headerlink" title="Median Filtering"></a>Median Filtering</h1><p>미디언 필터는 찾고자 하는 픽셀값의 이웃한 값들을 제곱하고 정렬하여, 이중 중간값을 출력하는 필터이다.</p>
-<p>Median Filter<br>![이미지](&#x2F;images&#x2F;Image Processing&#x2F;06&#x2F;2.png)</p>
+<p>Median Filter<br><img src="/images/Image_Processing/06/2.png" alt="이미지"></p>
 <ol>
 <li>이미지에서 찾고자 하는 값의 픽셀을 가져온 후, 이웃한 주변의 값의 픽셀들을 제곱하고 이를 정렬한다.</li>
 <li>정렬 된 값 중 중간값을 출력한다.</li>
 </ol>
-<p>![이미지](&#x2F;images&#x2F;Image Processing&#x2F;06&#x2F;3.png)<br>K가 3인 미디언 필터를 사용했을 때 나오는 결과이다. 마찬가지로 동전에 대한 세부적인 부분은 어느정도 블러 처리가 되었지만, Salt and Pepper 노이즈가 제거 되었다.</p>
-<p>![이미지](&#x2F;images&#x2F;Image Processing&#x2F;06&#x2F;4.png)<br>Median 필터가 Salt and Pepper와 같은 노이즈를 제거하는데는 큰 도움이 되지만, 다음과 같은 이미지처럼 낮은 조명밝기에서 주로 나타나는,<br>모든 픽셀에 노이즈가 있는, 좀 더 사실적인 노이즈에서는 오른쪽 이미지와 같이 큰 도움이 되지는 않는다.</p>
+<p><img src="/images/Image_Processing/06/3.png" alt="이미지"><br>K가 3인 미디언 필터를 사용했을 때 나오는 결과이다. 마찬가지로 동전에 대한 세부적인 부분은 어느정도 블러 처리가 되었지만, Salt and Pepper 노이즈가 제거 되었다.</p>
+<p><img src="/images/Image_Processing/06/4.png" alt="이미지"><br>Median 필터가 Salt and Pepper와 같은 노이즈를 제거하는데는 큰 도움이 되지만, 다음과 같은 이미지처럼 낮은 조명밝기에서 주로 나타나는,<br>모든 픽셀에 노이즈가 있는, 좀 더 사실적인 노이즈에서는 오른쪽 이미지와 같이 큰 도움이 되지는 않는다.</p>
 <h1 id="참고-영상"><a href="#참고-영상" class="headerlink" title="참고 영상"></a>참고 영상</h1><p><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=7FP7ndMEfsc" title="유튜브 주소">Non-Linear Image Filters | Image Processing I</a></p>
 <hr>
 
