@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"limjkk.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Tic Tac Toe">
+<meta property="og:url" content="https://limjkk.github.io/2022/12/25/C++/2018-09-19-TicTacToe/index.html">
+<meta property="og:site_name" content="임진규의 Devlog">
+<meta property="og:locale" content="ko_KR">
+<meta property="article:published_time" content="2022-12-24T20:15:05.247Z">
+<meta property="article:modified_time" content="2022-12-25T04:52:24.948Z">
+<meta property="article:author" content="Lim Jin Kyu">
+<meta property="article:tag" content="객체지향 프로그래밍">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://limjkk.github.io/2022/12/25/C++/2018-09-19-TicTacToe/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'ko'
+  };
+</script>
+
+  <title>Tic Tac Toe | 임진규의 Devlog</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-158509105-1"></script>
+    <script>
+      if (CONFIG.hostname === location.hostname) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-158509105-1');
+      }
+    </script>
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">임진규의 Devlog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Jinkyu's Devlog</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>홈</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>카테고리</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>아카이브</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>태그</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
+    <link itemprop="mainEntityOfPage" href="https://limjkk.github.io/2022/12/25/C++/2018-09-19-TicTacToe/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/myimage.jpg">
+      <meta itemprop="name" content="Lim Jin Kyu">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="임진규의 Devlog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Tic Tac Toe
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+              
+
+              <time title="Post created: 2022-12-25 05:15:05 / Updated at: 13:52:24" itemprop="dateCreated datePublished" datetime="2022-12-25T05:15:05+09:00">2022-12-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programing/" itemprop="url" rel="index"><span itemprop="name">Programing</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Programing/C/" itemprop="url" rel="index"><span itemprop="name">C++</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2022/12/25/C++/2018-09-19-TicTacToe/#disqus_thread" itemprop="discussionUrl">
+      <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2022/12/25/C++/2018-09-19-TicTacToe/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              <span>501</span>
+            </span>
+            <span class="post-meta-item" title="Reading time">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              <span>2 mins.</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <hr>
+<span id="more"></span>
+<p>Tic Tac Toe<br>객체지향 프로그래밍</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cstdlib&gt;</span><br><span class="line">#include &lt;ctime&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line">char User_Sep(int i) // 유저 구분</span><br><span class="line">&#123;</span><br><span class="line">	switch (i)</span><br><span class="line">	&#123;</span><br><span class="line">	case -1: // 플레이어 0</span><br><span class="line">		return &#x27;X&#x27;;</span><br><span class="line">	case 0:</span><br><span class="line">		return &#x27; &#x27;;</span><br><span class="line">	case 1: // 플레이어 1</span><br><span class="line">		return &#x27;O&#x27;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void Print_Board(int Board[9]) // 출력</span><br><span class="line">&#123;</span><br><span class="line">	int i;</span><br><span class="line">	cout &lt;&lt; User_Sep(Board[0]) &lt;&lt; &quot; | &quot; &lt;&lt; User_Sep(Board[1]) &lt;&lt; &quot; | &quot; &lt;&lt; User_Sep(Board[2]) &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; User_Sep(Board[3]) &lt;&lt; &quot; | &quot; &lt;&lt; User_Sep(Board[4]) &lt;&lt; &quot; | &quot; &lt;&lt; User_Sep(Board[5]) &lt;&lt; endl;</span><br><span class="line">	cout &lt;&lt; User_Sep(Board[6]) &lt;&lt; &quot; | &quot; &lt;&lt; User_Sep(Board[7]) &lt;&lt; &quot; | &quot; &lt;&lt; User_Sep(Board[8]) &lt;&lt; endl;</span><br><span class="line">&#125;// Board 배열에 있는 데이터를 가져와서 User_Sep함수로 전달 후, 출력</span><br><span class="line">int Check_Win(int Board[9]) // 승리 체크</span><br><span class="line">&#123;// 이기는 경우의 수를 2차원 배열로 나타냄.</span><br><span class="line">	int WinBoard[8][3] = &#123;</span><br><span class="line">	&#123;0,1,2&#125;,</span><br><span class="line">	&#123;3,4,5&#125;,</span><br><span class="line">	&#123;6,7,8&#125;,</span><br><span class="line">	&#123;0,3,6&#125;,</span><br><span class="line">	&#123;1,4,7&#125;,</span><br><span class="line">	&#123;2,5,8&#125;,</span><br><span class="line">	&#123;2,4,6&#125;,</span><br><span class="line">	&#123;0,4,8&#125;</span><br><span class="line">	&#125;, i;</span><br><span class="line">	for (i = 0; i &lt; 8; ++i)</span><br><span class="line">	&#123;// 만약 각데이터가 2차원배열과 동일하면</span><br><span class="line">		if (Board[WinBoard[i][0]] != 0 &amp;&amp; Board[WinBoard[i][0]] == Board[WinBoard[i][1]] &amp;&amp; Board[WinBoard[i][0]] == Board[WinBoard[i][2]])</span><br><span class="line">			return Board[WinBoard[i][2]]; // 승리한 플레이어의 값을 리턴</span><br><span class="line">	&#125;// -1 : 플레이어 0 , 0 : 비어있음 , 1 : 플레이어 1</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br><span class="line">void User_Play(int Board[9])</span><br><span class="line">&#123;// 플레이어 0 : -1 | 플레이어 1 : 1</span><br><span class="line">	int input, i;</span><br><span class="line">	for (i = 0; i &lt; 9; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		if (Check_Win(Board) != 0)</span><br><span class="line">			return;</span><br><span class="line">		cout &lt;&lt; i % 2 &lt;&lt; &quot; 번 플레이어 차례입니다.&quot; &lt;&lt; endl;</span><br><span class="line">		Print_Board(Board);</span><br><span class="line">		cin &gt;&gt; input;</span><br><span class="line">		if (i % 2 == 0)</span><br><span class="line">			Board[input] = -1; // 짝수번째 - 0번 플레이어</span><br><span class="line">		else</span><br><span class="line">			Board[input] = 1; // 홀수번째 - 1번 플레이어</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">void Random(int Board[9])</span><br><span class="line">&#123;</span><br><span class="line">	int random;</span><br><span class="line">	while (1)</span><br><span class="line">	&#123;// 시드를 초기화</span><br><span class="line">		srand((unsigned int)time(NULL));</span><br><span class="line">		random = rand() % 8; // 0부터 8까지 난수 발생</span><br><span class="line">		if (Board[random] == 0)// Board의 난수번째 인덱스에 데이터가 0이라면</span><br><span class="line">		&#123;</span><br><span class="line">			Board[random] = 1; // 난수번째 인덱스에 1을 입력</span><br><span class="line">			return;</span><br><span class="line">		&#125;</span><br><span class="line">		else // 만약 난수번째 인덱스에 데이터가 있다면,</span><br><span class="line">			continue; // 반복문을 재실행</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">void AI_Play(int Board[9])</span><br><span class="line">&#123;// 인공지능과 플레이.</span><br><span class="line">	int i, input;</span><br><span class="line">	for (i = 0; i &lt; 9; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		if (Check_Win(Board) != 0) // 게임 보드의 데이터 검사</span><br><span class="line">			return; // 만약 Check_Win 의 데이터가 1또는 -1이라면 게임종료</span><br><span class="line">		cout &lt;&lt; i % 2 &lt;&lt; &quot; 번 플레이어 차례입니다.&quot; &lt;&lt; endl;</span><br><span class="line">		Print_Board(Board); // Print_Board 함수를 이용하여 데이터 출력</span><br><span class="line">		if (i % 2 == 0) // 플레이어 0</span><br><span class="line">		&#123;</span><br><span class="line">			cin &gt;&gt; input;// 플레이어 0 의 좌표를 입력받음</span><br><span class="line">			Board[input] = -1; // 플레이어 0이 입력한 좌표에 -1 입력</span><br><span class="line">		&#125;</span><br><span class="line">		else if (i % 2 == 1) // 플레이어 1(AI)</span><br><span class="line">			Random(Board); // 랜덤함수를 통해 난수를 발생, 보드에 데이터를 저장</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int Board[9] = &#123; 0 &#125;, input, win0 = 0,win1 =0 ,game = 0;</span><br><span class="line">	double win_rate0 = 0, win_rate1 = 0;// 이길 확률</span><br><span class="line">	while (1)</span><br><span class="line">	&#123;</span><br><span class="line">		if (game &gt; 0)</span><br><span class="line">		&#123;</span><br><span class="line">			for (int i = 0; i &lt; 9; i++)</span><br><span class="line">				Board[i] = 0;</span><br><span class="line">			win_rate0 = (win0 / game) * 100;</span><br><span class="line">			win_rate1 = (win1 / game) * 100;</span><br><span class="line">			cout &lt;&lt; &quot;0번 플레이어의 승률&quot; &lt;&lt; win_rate0 &lt;&lt; &quot; %&quot;&lt;&lt; endl;</span><br><span class="line">			cout &lt;&lt; &quot;1번 플레이어의 승률&quot; &lt;&lt; win_rate1 &lt;&lt; &quot; %&quot;&lt;&lt; endl;</span><br><span class="line">		&#125;</span><br><span class="line">		cout &lt;&lt; &quot;Tic Tac Toe&quot; &lt;&lt; endl &lt;&lt; &quot;1. 1대1 플레이 | 2. 인공지능과 플레이 | 3. 종료 &quot; &lt;&lt; endl;</span><br><span class="line">		cin &gt;&gt; input;</span><br><span class="line">		if (input == 1)</span><br><span class="line">			User_Play(Board); // 사용자의 입력데이터가 1이면 1대1 플레이</span><br><span class="line">		else if (input == 2)</span><br><span class="line">			AI_Play(Board); // 사용자의 입력데이터가 2라면, 인공지능과 플레이</span><br><span class="line">		else</span><br><span class="line">			break; // break;를 통해 게임 종료</span><br><span class="line">		Print_Board(Board); // 게임이 끝나면, 보드 출력</span><br><span class="line">		switch (Check_Win(Board)) // 게임을 통해 Return 된 값</span><br><span class="line">		&#123;</span><br><span class="line">		case -1: // 플레이어 0</span><br><span class="line">		&#123;</span><br><span class="line">			game++;</span><br><span class="line">			win0++;</span><br><span class="line">			cout &lt;&lt; &quot;0번 플레이어가 승리 하였습니다.&quot;&lt;&lt;endl;</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">		case 0: // 비긴경우</span><br><span class="line">		&#123;</span><br><span class="line">			game++;</span><br><span class="line">			cout &lt;&lt; &quot;비겼습니다.&quot; &lt;&lt; endl;</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">		case  1: // 플레이어 1이 이긴 경우</span><br><span class="line">		&#123;</span><br><span class="line">			game++;</span><br><span class="line">			win1;</span><br><span class="line">			cout &lt;&lt; &quot;1번 플레이어가 승리 하였습니다.&quot;&lt;&lt;endl;</span><br><span class="line">			break;</span><br><span class="line">		&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%EA%B0%9D%EC%B2%B4%EC%A7%80%ED%96%A5-%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/" rel="tag"># 객체지향 프로그래밍</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/12/25/Bigdata/2020-06-30-Bigdata9,10(term)/" rel="prev" title="(텀 프로젝트) 9. 데이터세트 생성 , 10. 제플린 노트북">
+      <i class="fa fa-chevron-left"></i> (텀 프로젝트) 9. 데이터세트 생성 , 10. 제플린 노트북
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/12/25/C++/2018-12-30-Project/" rel="next" title="C++ 텀 프로젝트">
+      C++ 텀 프로젝트 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    
+  <div class="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          목차
+        </li>
+        <li class="sidebar-nav-overview">
+          흝어보기
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Lim Jin Kyu"
+      src="/images/myimage.jpg">
+  <p class="site-author-name" itemprop="name">Lim Jin Kyu</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">102</span>
+          <span class="site-state-item-name">포스트</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">카테고리</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">태그</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/limjkk" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;limjkk" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:limjkk96@gmail.com" title="E-Mail → mailto:limjkk96@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.instagram.com/limjkk96" title="Instagram → https:&#x2F;&#x2F;www.instagram.com&#x2F;limjkk96" rel="noopener" target="_blank"><i class="fab fa-instagram fa-fw"></i>Instagram</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lim Jin Kyu</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="Symbols count total">10k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">35 mins.</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+  
+
+  
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://limjkk-github-io.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  var disqus_config = function() {
+    this.page.url = "https://limjkk.github.io/2022/12/25/C++/2018-09-19-TicTacToe/";
+    this.page.identifier = "2022/12/25/C++/2018-09-19-TicTacToe/";
+    this.page.title = "Tic Tac Toe";
+    };
+  NexT.utils.loadComments(document.querySelector('#disqus_thread'), () => {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://limjkk-github-io.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  });
+</script>
+
+</body>
+</html>
